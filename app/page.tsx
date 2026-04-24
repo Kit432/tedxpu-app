@@ -58,7 +58,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-red-50 to-background dark:from-red-950/20 dark:to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-red-50 to-background dark:from-red-950/20 dark:to-background" />
 
         <div className="relative px-5 pt-12 pb-8">
           {/* Logo */}
@@ -201,7 +201,7 @@ export default function HomePage() {
 
       {/* Contact Section */}
       <section className="px-5 py-6 pb-8">
-        <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 rounded-2xl p-5 border border-red-100 dark:border-red-900/50">
+        <div className="bg-linear-to-r from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 rounded-2xl p-5 border border-red-100 dark:border-red-900/50">
           <div className="flex items-center gap-3 mb-3">
             <Mail className="w-5 h-5 text-red-600" />
             <h3 className="text-sm font-semibold text-foreground">Get in Touch</h3>

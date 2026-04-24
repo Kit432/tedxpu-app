@@ -32,7 +32,7 @@ export function BottomNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 px-4 py-1 rounded-lg transition-all duration-200 min-w-[64px]",
+                  "flex flex-col items-center justify-center gap-0.5 px-4 py-1 rounded-lg transition-all duration-200 min-w-16",
                   "active:scale-95",
                   isActive 
                     ? "text-primary" 
