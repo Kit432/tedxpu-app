@@ -70,7 +70,7 @@ export function WorkshopList() {
                 </div>
 
                 <button
-                  onClick={() => handleRegister(workshop.id)}
+                  //onClick={() => handleRegister(workshop.id)}
                   disabled={isFull}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                     isFull
