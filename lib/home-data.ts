@@ -3,9 +3,9 @@ import { FaFacebookF, FaInstagram, FaTiktok, FaSpotify, FaYoutube, FaLinkedin } 
 import { EventData, TransportOption, SocialLink, TeamMember } from "@/types/home";
 
 export const eventData: EventData = {
-  title: "TEDxPanteionUniversity",
+  title: "TEDxPanteion University",
   theme: "Sensorium",
-  date: "March 23rd, 2026",
+  date: "May 23rd, 2026",
   time: "10:00 AM - 6:00 PM",
   venue: "Ίδρυμα Μιχάλης Κακογιάννης",
   address: "Pireos 206, Tavros 177 78",

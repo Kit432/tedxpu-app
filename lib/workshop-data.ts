@@ -5,7 +5,7 @@ export const workshops: Workshop[] = [
     id: "w1",
     title: "-",
     description: "-",
-    instructor: "Dr. -",
+    instructor: "-",
     time: "11:45 - 12:30",
     location: "Room A",
     capacity: 30,

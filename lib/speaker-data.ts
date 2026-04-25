@@ -3,7 +3,7 @@ import { Speaker } from "@/types/speaker";
 export const speakers: Speaker[] = [
   {
     id: "1",
-    name: "Dr.",
+    name: "-",
     headline: "-",
     bio: "-",
     imageUrl: "https://api.dicebear.com/9.x/notionists/svg?seed=Elena",
