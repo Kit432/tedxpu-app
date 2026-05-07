@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { MapPin, Calendar } from "lucide-react";
-import { eventData } from "@/lib/home-data";
+import { eventData } from "@/lib/info-data";
 
 export function HeroSection() {
   return (

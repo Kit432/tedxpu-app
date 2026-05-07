@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { transportationOptions } from "@/lib/home-data";
+import { transportationOptions } from "@/lib/info-data";
 
 export function TransportSection() {
   return (

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { teamMembers } from "@/lib/home-data";
+import { teamMembers } from "@/lib/info-data";
 
 export function TeamSection() {
   return (

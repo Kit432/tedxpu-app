@@ -17,7 +17,7 @@ export default function Header() {
         <img
           src="/logos/sensorium.svg"
           alt="Sensorium"
-          className="h-13 w-auto shrink-0"
+          className="h-11 w-auto shrink-0"
         />
       </Link>
     </header>

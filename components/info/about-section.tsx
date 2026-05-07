@@ -1,4 +1,4 @@
-import { eventData } from "@/lib/home-data";
+import { eventData } from "@/lib/info-data";
 
 export function AboutSection() {
   return (

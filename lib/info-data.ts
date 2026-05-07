@@ -1,6 +1,6 @@
 import { Globe } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaTiktok, FaSpotify, FaYoutube, FaLinkedin } from "react-icons/fa";
-import { EventData, TransportOption, SocialLink, TeamMember } from "@/types/home";
+import { EventData, TransportOption, SocialLink, TeamMember } from "@/types/info";
 
 export const eventData: EventData = {
   title: "TEDxPanteion University",

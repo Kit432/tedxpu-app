@@ -1,4 +1,4 @@
-import { socialLinks } from "@/lib/home-data";
+import { socialLinks } from "@/lib/info-data";
 
 export function SocialSection() {
   return (

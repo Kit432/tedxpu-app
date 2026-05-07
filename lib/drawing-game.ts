@@ -16,32 +16,12 @@ export const sensoriumDrawings: SensoriumDrawing[] = [
     height: 877,
     artSrc: "/drawings/eye.svg",
     targetPaths: [
-      "M187.93 652.74C164.42 623.92 159.33 585.48 160.36 549.24C161.11 522.85 164.72 496.26 174.72 471.59C184.72 446.92 201.5 424.18 224.85 409.45C256.22 389.66 298.59 386.22 333.16 400.67C343.62 405.04 353.53 411.07 360.64 419.49C369.13 429.55 373.06 442.28 375.97 454.8C384.67 492.18 386.02 531.05 379.92 568.86C374.95 599.7 363.92 631.5 338.81 651.94C324.92 663.25 307.6 670.29 289.9 675.05C272.16 679.82 253.4 682.44 235.22 679.44C217.04 676.44 199.45 667.24 189.82 652.47",
-      "M187.93 652.74C164.42 623.92 159.33 585.48 160.36 549.24C161.11 522.85 164.72 496.26 174.72 471.59C184.72 446.92 201.5 424.18 224.85 409.45C256.22 389.66 298.59 386.22 333.16 400.67C343.62 405.04 353.53 411.07 360.64 419.49C369.13 429.55 373.06 442.28 375.97 454.8C384.67 492.18 386.02 531.05 379.92 568.86C374.95 599.7 363.92 631.5 338.81 651.94C324.92 663.25 307.6 670.29 289.9 675.05C272.16 679.82 253.4 682.44 235.22 679.44C217.04 676.44 199.45 667.24 189.82 652.47",
       "M125.52 857.32C97.81 843.82 77.87 822.79 71.93 816.43C66.11 810.19 45.86 787.71 29.41 747.18C-7.72 655.71 12.36 565.68 17.87 540.98C20.88 527.49 25.4 508.98 36.76 472.67C45.43 444.94 54.11 417.22 63.31 389.66C72.08 363.38 81.75 336.52 100.18 315.83C108.83 306.12 118.92 297.33 140.98 283.69C203.61 244.96 261.28 229.32 270.78 226.81C330.49 211.08 360.34 203.22 394.74 216.32C403.12 219.51 426.49 229.54 457.08 267.45C470.44 284.01 508.39 337.42 526.84 431.25C547.71 537.35 516 646.34 478.56 747.78C474.09 759.88 469.45 772.13 461.77 782.5C455.7 790.69 446.71 799.51 432.2 808.23C371.55 844.68 274.12 859.02 274.12 859.02C199.85 869.95 161.97 875.06 125.53 857.31L125.52 857.32Z",
-      "M45.5 83.41C63.41 114.29 81.33 145.17 99.24 176.05",
       "M598.48 89.23C579.92 119.73 561.36 150.23 542.8 180.72",
-      "M318.81 7.5C319.18 43.2 319.56 78.9 319.94 114.6",
-      "M46.7976 72.7021C48.6801 83.997 54.3561 96.4042 62.4279 108.27C67.6761 117.311 74.3218 126.838 83.3349 137.748C87.6418 143.01 91.4068 147.716 103.843 161.122"
+      "M318.81 7.5C319.18 43.2 319.56 78.9 319.94 114.6"
     ],
   },
 
-  {
-    id: "oval",
-    viewBox: "0 0 606 877",
-    width: 606,
-    height: 877,
-    artSrc: "/drawings/eye.svg",
-    targetPaths: [
-      "M187.93 652.74C164.42 623.92 159.33 585.48 160.36 549.24C161.11 522.85 164.72 496.26 174.72 471.59C184.72 446.92 201.5 424.18 224.85 409.45C256.22 389.66 298.59 386.22 333.16 400.67C343.62 405.04 353.53 411.07 360.64 419.49C369.13 429.55 373.06 442.28 375.97 454.8C384.67 492.18 386.02 531.05 379.92 568.86C374.95 599.7 363.92 631.5 338.81 651.94C324.92 663.25 307.6 670.29 289.9 675.05C272.16 679.82 253.4 682.44 235.22 679.44C217.04 676.44 199.45 667.24 189.82 652.47",
-      "M187.93 652.74C164.42 623.92 159.33 585.48 160.36 549.24C161.11 522.85 164.72 496.26 174.72 471.59C184.72 446.92 201.5 424.18 224.85 409.45C256.22 389.66 298.59 386.22 333.16 400.67C343.62 405.04 353.53 411.07 360.64 419.49C369.13 429.55 373.06 442.28 375.97 454.8C384.67 492.18 386.02 531.05 379.92 568.86C374.95 599.7 363.92 631.5 338.81 651.94C324.92 663.25 307.6 670.29 289.9 675.05C272.16 679.82 253.4 682.44 235.22 679.44C217.04 676.44 199.45 667.24 189.82 652.47",
-      "M125.52 857.32C97.81 843.82 77.87 822.79 71.93 816.43C66.11 810.19 45.86 787.71 29.41 747.18C-7.72 655.71 12.36 565.68 17.87 540.98C20.88 527.49 25.4 508.98 36.76 472.67C45.43 444.94 54.11 417.22 63.31 389.66C72.08 363.38 81.75 336.52 100.18 315.83C108.83 306.12 118.92 297.33 140.98 283.69C203.61 244.96 261.28 229.32 270.78 226.81C330.49 211.08 360.34 203.22 394.74 216.32C403.12 219.51 426.49 229.54 457.08 267.45C470.44 284.01 508.39 337.42 526.84 431.25C547.71 537.35 516 646.34 478.56 747.78C474.09 759.88 469.45 772.13 461.77 782.5C455.7 790.69 446.71 799.51 432.2 808.23C371.55 844.68 274.12 859.02 274.12 859.02C199.85 869.95 161.97 875.06 125.53 857.31L125.52 857.32Z",
-      "M45.5 83.41C63.41 114.29 81.33 145.17 99.24 176.05",
-      "M598.48 89.23C579.92 119.73 561.36 150.23 542.8 180.72",
-      "M318.81 7.5C319.18 43.2 319.56 78.9 319.94 114.6",
-      "M46.7976 72.7021C48.6801 83.997 54.3561 96.4042 62.4279 108.27C67.6761 117.311 74.3218 126.838 83.3349 137.748C87.6418 143.01 91.4068 147.716 103.843 161.122"
-    ],
-  },
 ];
 
 // Drawing Score
@@ -49,6 +29,27 @@ type Point = {
   x: number;
   y: number;
 };
+
+type PathScoreDebug = {
+  pathIndex: number;
+  pathLength: number;
+  coveredPoints: number;
+  totalPoints: number;
+  coverage: number;
+};
+
+export type DrawingScoreResult = {
+  score: number;
+  succeeded: boolean;
+  totalCoverage: number;
+  averageDistance: number;
+  pathCoverages: PathScoreDebug[];
+};
+
+const POINT_SPACING = 8;
+const COVER_RADIUS = 28;
+const SUCCESS_COVERAGE = 0.72;
+const MAX_AVERAGE_DISTANCE = 45;
 
 function distance(a: Point, b: Point) {
   return Math.hypot(a.x - b.x, a.y - b.y);
@@ -75,11 +76,12 @@ function distanceToSegment(point: Point, a: Point, b: Point) {
   return distance(point, closest);
 }
 
-function samplePath(svgPath: SVGPathElement, samples = 220): Point[] {
+function samplePathByLength(svgPath: SVGPathElement): Point[] {
   const length = svgPath.getTotalLength();
+  const sampleCount = Math.max(8, Math.ceil(length / POINT_SPACING));
 
-  return Array.from({ length: samples }, (_, index) => {
-    const p = svgPath.getPointAtLength((index / (samples - 1)) * length);
+  return Array.from({ length: sampleCount }, (_, index) => {
+    const p = svgPath.getPointAtLength((index / (sampleCount - 1)) * length);
 
     return {
       x: p.x,
@@ -88,40 +90,104 @@ function samplePath(svgPath: SVGPathElement, samples = 220): Point[] {
   });
 }
 
-export function calculateDrawingScore(
+function getAverageDistanceToTarget(
+  userPoints: Point[],
+  targetPoints: Point[]
+) {
+  if (!userPoints.length || targetPoints.length < 2) return Infinity;
+
+  const totalDistance = userPoints.reduce((sum, point) => {
+    let closest = Infinity;
+
+    for (let i = 0; i < targetPoints.length - 1; i++) {
+      const segmentDistance = distanceToSegment(
+        point,
+        targetPoints[i],
+        targetPoints[i + 1]
+      );
+
+      if (segmentDistance < closest) {
+        closest = segmentDistance;
+      }
+    }
+
+    return sum + closest;
+  }, 0);
+
+  return totalDistance / userPoints.length;
+}
+
+export function calculateDrawingResult(
   userPoints: Point[],
   targetPaths: SVGPathElement[]
-) {
-  if (!targetPaths.length || userPoints.length < 12) return 0;
+): DrawingScoreResult {
+  if (!targetPaths.length || userPoints.length < 12) {
+    return {
+      score: 0,
+      succeeded: false,
+      totalCoverage: 0,
+      averageDistance: Infinity,
+      pathCoverages: [],
+    };
+  }
 
-  const targetPoints = targetPaths.flatMap((path) => samplePath(path));
+  const sampledPaths = targetPaths.map((path, pathIndex) => {
+    const points = samplePathByLength(path);
+    const pathLength = path.getTotalLength();
 
-  const averageDistance =
-    userPoints.reduce((sum, point) => {
-      let closest = Infinity;
+    const coveredPoints = points.filter((targetPoint) =>
+      userPoints.some((userPoint) => distance(userPoint, targetPoint) <= COVER_RADIUS)
+    ).length;
 
-      for (let i = 0; i < targetPoints.length - 1; i++) {
-        const segmentDistance = distanceToSegment(
-          point,
-          targetPoints[i],
-          targetPoints[i + 1]
-        );
+    const coverage = coveredPoints / points.length;
 
-        if (segmentDistance < closest) {
-          closest = segmentDistance;
-        }
-      }
+    return {
+      pathIndex,
+      pathLength,
+      points,
+      coveredPoints,
+      totalPoints: points.length,
+      coverage,
+    };
+  });
 
-      return sum + closest;
-    }, 0) / userPoints.length;
+  const allTargetPoints = sampledPaths.flatMap((path) => path.points);
 
-  const coverage =
-    targetPoints.filter((target) =>
-      userPoints.some((point) => distance(point, target) < 26)
-    ).length / targetPoints.length;
+  const totalCoveredPoints = sampledPaths.reduce(
+    (sum, path) => sum + path.coveredPoints,
+    0
+  );
 
-  const accuracyScore = Math.max(0, 100 - averageDistance * 2.2);
-  const coverageScore = coverage * 100;
+  const totalTargetPoints = sampledPaths.reduce(
+    (sum, path) => sum + path.totalPoints,
+    0
+  );
 
-  return Math.round(accuracyScore * 0.58 + coverageScore * 0.42);
+  const totalCoverage = totalCoveredPoints / totalTargetPoints;
+
+  const averageDistance = getAverageDistanceToTarget(userPoints, allTargetPoints);
+
+  const accuracyMultiplier = Math.max(
+    0,
+    Math.min(1, 1 - averageDistance / MAX_AVERAGE_DISTANCE)
+  );
+
+  const score = Math.round(totalCoverage * accuracyMultiplier * 100);
+
+  const succeeded =
+    totalCoverage >= SUCCESS_COVERAGE && averageDistance <= MAX_AVERAGE_DISTANCE;
+
+  return {
+    score,
+    succeeded,
+    totalCoverage,
+    averageDistance,
+    pathCoverages: sampledPaths.map((path) => ({
+      pathIndex: path.pathIndex,
+      pathLength: path.pathLength,
+      coveredPoints: path.coveredPoints,
+      totalPoints: path.totalPoints,
+      coverage: path.coverage,
+    })),
+  };
 }

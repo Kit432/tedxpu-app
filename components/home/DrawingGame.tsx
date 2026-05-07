@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { sensoriumDrawings, calculateDrawingScore } from "@/lib/drawing-game";
+import { sensoriumDrawings, calculateDrawingResult } from "@/lib/drawing-game";
 
 type Point = {
   x: number;
   y: number;
 };
 
-const SUCCESS_THRESHOLD = 55;
+const SUCCESS_THRESHOLD = 70;
 const STOP_DELAY_MS = 900;
 const SUCCESS_ANIMATION_MS = 1400;
 const FAIL_RESET_MS = 500;
@@ -149,15 +149,22 @@ export function DrawingGame() {
       return;
     }
 
-    const score = calculateDrawingScore(allPoints, hiddenPathRefs.current);
+    const result = calculateDrawingResult(allPoints, hiddenPathRefs.current);
 
-    console.log("[DrawingGame] Score result", {
-      score,
-      successThreshold: SUCCESS_THRESHOLD,
-      succeeded: score >= SUCCESS_THRESHOLD,
+    console.log("[DrawingGame] Score result:", {
+      drawingId: currentDrawing.id,
+      score: result.score,
+      succeeded: result.succeeded,
+      totalCoverage: `${Math.round(result.totalCoverage * 100)}%`,
+      averageDistance: result.averageDistance,
+      pathCoverages: result.pathCoverages.map((path) => ({
+        pathIndex: path.pathIndex,
+        coverage: `${Math.round(path.coverage * 100)}%`,
+        pathLength: Math.round(path.pathLength),
+      })),
     });
 
-    if (score >= SUCCESS_THRESHOLD) {
+    if (result.succeeded) {
       setIsSuccess(true);
       setShowStars(true);
 
@@ -197,7 +204,7 @@ export function DrawingGame() {
     <section className="relative flex min-h-0 flex-1 items-center justify-center px-5 py-3">
       <div
         ref={boardRef}
-        className={`relative w-full max-w-97.5 touch-none select-none rounded-4xl bg-white transition-transform duration-300 ${
+        className={`relative w-full max-w-[200px] touch-none select-none rounded-[2rem] bg-white ${
           isFailing ? "animate-drawing-fail" : ""
         } ${isSuccess ? "scale-[1.02]" : ""}`}
         style={{
