@@ -11,7 +11,7 @@ export function TeamSection() {
         {teamMembers.map((member) => (
           <div 
             key={member.name} 
-            className="relative aspect-4/5 w-full overflow-hidden rounded-xl border border-border/50 bg-muted/30 shadow-sm"
+            className="relative aspect-4/5 w-full px-4 pb-10 rounded-xl border border-border/50 bg-muted/30 shadow-sm"
           >
             <Image 
               src={member.image} 

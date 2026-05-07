@@ -4,7 +4,7 @@ import { eventData } from "@/lib/info-data";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative px-4 pb-10">
       <div className="absolute inset-0 bg-linear-to-b from-red-50 to-background dark:from-red-950/20 dark:to-background" />
       <div className="relative px-5 pt-12 pb-8">
         <div className="flex justify-center mb-6">

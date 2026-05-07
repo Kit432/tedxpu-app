@@ -2,22 +2,24 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="flex h-19 shrink-0 items-center px-5 pt-[env(safe-area-inset-top)]">
+    <header className="z-30 flex h-[clamp(58px,10dvh,74px)] shrink-0 items-center overflow-visible px-[clamp(14px,4vw,22px)] pt-[env(safe-area-inset-top)]">
       <Link
         href="/"
         aria-label="TEDx Panteion University Sensorium home"
-        className="flex w-full items-center justify-start gap-4"
+        className="flex w-full min-w-0 items-center gap-[clamp(18px,2.8vw,14px)] overflow-visible"
       >
         <img
           src="/logos/tedxpu.svg"
           alt="TEDx Panteion University"
-          className="h-11 w-auto shrink-0"
+          className="h-[clamp(48px,5vw,25px)] max-w-[58%] shrink-0 object-contain"
+          draggable={false}
         />
 
         <img
           src="/logos/sensorium.svg"
           alt="Sensorium"
-          className="h-11 w-auto shrink-0"
+          className="h-auto max-h-[clamp(34px,11vw,50px)] min-w-0 flex-1 object-contain object-left"
+          draggable={false}
         />
       </Link>
     </header>

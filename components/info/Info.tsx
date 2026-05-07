@@ -4,7 +4,7 @@ import { SocialSection } from "./social-section";
 
 export function Info() {
   return (
-    <main className="min-h-[100dvh] overflow-hidden bg-white text-black">
+    <main className="min-h-[100dvh] px-4 pb-10 bg-white text-black">
       <div className="relative mx-auto flex min-h-[100dvh] max-w-[430px] flex-col bg-white">
         <AboutSection />
         <TeamSection />

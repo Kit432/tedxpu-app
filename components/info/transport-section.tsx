@@ -16,7 +16,7 @@ export function TransportSection() {
           </div>
         ))}
       </div>
-      <div className="mt-4 rounded-2xl overflow-hidden border border-border/50 bg-muted/30 h-40 flex items-center justify-center">
+      <div className="mt-4 rounded-2xl px-4 pb-10 border border-border/50 bg-muted/30 h-40 flex items-center justify-center">
         <div className="text-center text-muted-foreground">
           <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
           <p className="text-xs">Interactive map coming soon</p>
