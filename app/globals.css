@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
@@ -60,4 +62,48 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes drawingFail {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes starBurst {
+  0% {
+    transform: translateY(10px) scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+.animate-drawing-fail {
+  animation: drawingFail 0.45s ease;
+}
+
+.animate-star-burst {
+  animation: starBurst 0.9s ease forwards;
 }
