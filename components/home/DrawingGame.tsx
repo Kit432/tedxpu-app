@@ -259,7 +259,7 @@ export function DrawingGame() {
               key={`stroke-${index}`}
               d={path}
               fill="none"
-              stroke="#111111"
+              stroke="#F17BB0"
               strokeWidth="12"
               strokeLinecap="round"
               strokeLinejoin="round"
