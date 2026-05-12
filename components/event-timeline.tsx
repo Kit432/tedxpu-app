@@ -87,7 +87,7 @@ export function EventTimeline() {
           Event Types
         </p>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(eventColors).map(([type, colorClass]) => {
+          {Object.keys(eventColors).map((type) => {
             const Icon = eventIcons[type as TimelineEvent["type"]];
             const label = type.charAt(0).toUpperCase() + type.slice(1);
             return (

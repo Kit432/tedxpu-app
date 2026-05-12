@@ -17,11 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {
-        /* Built by Λιν Χονγκ Τσε (Κιτ) — TEDxPanteion University Sensorium web app 
-            Github: https://github.com/Kit432
-        */
-        }
+        {/*
+          Built by Λιν Χονγκ Τσε (Κιτ) — TEDxPanteion University Sensorium web app
+          Github: https://github.com/Kit432
+        */}
         <div className="fixed inset-0 bg-white text-black">
           <div className="relative mx-auto flex h-full w-full max-w-[430px] flex-col overflow-hidden bg-white">
             <Header />

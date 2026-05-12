@@ -1,13 +1,17 @@
 "use client";
 
+import type { ComponentType } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { WorkshopIcon } from "@/public/icons/workshop-icon";
 
 type NavItem = {
   label: string;
   href: string;
-  icon: string;
-  activeIcon: string;
+  icon?: string;
+  activeIcon?: string;
+  iconComponent?: ComponentType<{ active: boolean }>;
   exact?: boolean;
 };
 
@@ -30,6 +34,11 @@ const navItems: NavItem[] = [
     href: "/info",
     icon: "/icons/info.svg",
     activeIcon: "/icons/active-info.svg",
+  },
+  {
+    label: "Workshops",
+    href: "/workshops",
+    iconComponent: WorkshopIcon,
   },
 ];
 
@@ -54,6 +63,7 @@ export default function SideNav() {
     >
       {navItems.map((item) => {
         const active = isActivePath(pathname, item);
+        const IconComponent = item.iconComponent;
 
         return (
           <Link
@@ -63,12 +73,18 @@ export default function SideNav() {
             aria-current={active ? "page" : undefined}
             className="flex h-11 w-11 items-center justify-center rounded-2xl active:scale-95"
           >
-            <img
-              src={active ? item.activeIcon : item.icon}
-              alt=""
-              aria-hidden="true"
-              className="h-full w-full object-contain"
-            />
+            {IconComponent ? (
+              <IconComponent active={active} />
+            ) : (
+              <Image
+                src={active ? item.activeIcon! : item.icon!}
+                alt=""
+                width={44}
+                height={44}
+                aria-hidden="true"
+                className="h-full w-full object-contain"
+              />
+            )}
           </Link>
         );
       })}
