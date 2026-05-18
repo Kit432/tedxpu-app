@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sensoriumDrawings, calculateDrawingResult } from "@/lib/drawing-game";
 
@@ -8,7 +9,6 @@ type Point = {
   y: number;
 };
 
-const SUCCESS_THRESHOLD = 70;
 const STOP_DELAY_MS = 900;
 const SUCCESS_ANIMATION_MS = 1400;
 const FAIL_RESET_MS = 500;
@@ -124,45 +124,15 @@ export function DrawingGame() {
   function evaluateDrawing() {
     const allPoints = strokesRef.current.flat();
 
-    console.log("[DrawingGame] Evaluating drawing", {
-      drawingId: currentDrawing.id,
-      viewBox: currentDrawing.viewBox,
-      width: currentDrawing.width,
-      height: currentDrawing.height,
-      strokesCount: strokesRef.current.length,
-      pointsCount: allPoints.length,
-      targetPathsCount: hiddenPathRefs.current.length,
-      successThreshold: SUCCESS_THRESHOLD,
-      firstUserPoint: allPoints[0],
-      lastUserPoint: allPoints[allPoints.length - 1],
-    });
-
     if (allPoints.length < 12) {
-      console.log("[DrawingGame] Failed: not enough points", {
-        pointsCount: allPoints.length,
-      });
       return;
     }
 
     if (hiddenPathRefs.current.length === 0) {
-      console.log("[DrawingGame] Failed: no target paths found");
       return;
     }
 
     const result = calculateDrawingResult(allPoints, hiddenPathRefs.current);
-
-    console.log("[DrawingGame] Score result:", {
-      drawingId: currentDrawing.id,
-      score: result.score,
-      succeeded: result.succeeded,
-      totalCoverage: `${Math.round(result.totalCoverage * 100)}%`,
-      averageDistance: result.averageDistance,
-      pathCoverages: result.pathCoverages.map((path) => ({
-        pathIndex: path.pathIndex,
-        coverage: `${Math.round(path.coverage * 100)}%`,
-        pathLength: Math.round(path.pathLength),
-      })),
-    });
 
     if (result.succeeded) {
       setIsSuccess(true);
@@ -195,7 +165,10 @@ export function DrawingGame() {
       .filter((stroke) => stroke.length > 0)
       .map((stroke) =>
         stroke
-          .map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`)
+          .map(
+            (point, index) =>
+              `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`
+          )
           .join(" ")
       );
   }, [strokes]);
@@ -240,9 +213,11 @@ export function DrawingGame() {
         </svg>
 
         {/* Real artwork from Figma */}
-        <img
+        <Image
           src={currentDrawing.artSrc}
           alt=""
+          fill
+          sizes="200px"
           aria-hidden="true"
           className={`pointer-events-none absolute inset-0 z-10 h-full w-full object-contain transition duration-500 ${
             isSuccess ? "scale-[1.03]" : "scale-100"
@@ -286,7 +261,7 @@ export function DrawingGame() {
                   animationDelay: star.delay,
                 }}
               >
-                ✦
+                {"\u2726"}
               </span>
             ))}
           </div>
