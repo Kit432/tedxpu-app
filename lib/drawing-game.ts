@@ -48,7 +48,7 @@ export type DrawingScoreResult = {
 
 const POINT_SPACING = 8;
 const COVER_RADIUS = 28;
-const SUCCESS_COVERAGE = 0.72;
+const SUCCESS_COVERAGE = 0.57;
 const MAX_AVERAGE_DISTANCE = 45;
 
 function distance(a: Point, b: Point) {

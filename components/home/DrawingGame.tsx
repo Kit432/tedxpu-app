@@ -235,7 +235,7 @@ export function DrawingGame() {
               d={path}
               fill="none"
               stroke="#F17BB0"
-              strokeWidth="12"
+              strokeWidth="28"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
