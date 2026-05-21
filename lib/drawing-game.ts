@@ -6,6 +6,11 @@ export type SensoriumDrawing = {
   height: number;
   artSrc: string;
   targetPaths: string[];
+  pathSrc?: string;
+  showGuidePaths?: boolean;
+  guideStroke?: string;
+  guideStrokeWidth?: number;
+  guideStrokeDasharray?: string;
 };
 
 export const sensoriumDrawings: SensoriumDrawing[] = [
@@ -20,6 +25,31 @@ export const sensoriumDrawings: SensoriumDrawing[] = [
       "M598.48 89.23C579.92 119.73 561.36 150.23 542.8 180.72",
       "M318.81 7.5C319.18 43.2 319.56 78.9 319.94 114.6"
     ],
+  },
+  {
+    id: "hand",
+    viewBox: "0 0 288 451",
+    width: 288,
+    height: 451,
+    artSrc: "/drawings/hand.svg",
+    pathSrc: "/drawings/hand.svg",
+    targetPaths: [],
+    showGuidePaths: true,
+    guideStrokeWidth: 8,
+    guideStrokeDasharray: "8 18",
+  },
+  {
+    id: "ear",
+    viewBox: "0 0 307 439",
+    width: 307,
+    height: 439,
+    artSrc: "/drawings/ear.svg",
+    pathSrc: "/drawings/ear.svg",
+    targetPaths: [],
+    showGuidePaths: true,
+    guideStroke: "#A3A3A3",
+    guideStrokeWidth: 8,
+    guideStrokeDasharray: "8 18",
   },
 
 ];
