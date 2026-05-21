@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Clock, Presentation } from "lucide-react";
-import { timelineEvents, eventIcons, eventColors, dotColors } from "@/lib/schedule-data";
+import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import { timelineEvents, eventIcons } from "@/lib/schedule-data";
 import { TimelineEvent } from "@/types/schedule";
 import { cn } from "@/lib/utils";
 
@@ -74,6 +73,139 @@ function findActiveEvent(date: Date) {
   return matchingEvents.find((event) => !event.isSectionHeader) ?? matchingEvents[0];
 }
 
+const sketchRotations = [
+  -2,
+  1,
+  -1,
+  2,
+  0,
+];
+
+function getSketchRotation(index: number) {
+  return sketchRotations[index % sketchRotations.length];
+}
+
+const eventTypeStyles: Record<
+  TimelineEvent["type"],
+  {
+    ink: string;
+    paper: string;
+    shadow: string;
+  }
+> = {
+  registration: {
+    ink: "#111827",
+    paper: "#f9fafb",
+    shadow: "rgba(17, 24, 39, 0.18)",
+  },
+  ceremony: {
+    ink: "#2563eb",
+    paper: "#eff6ff",
+    shadow: "rgba(37, 99, 235, 0.18)",
+  },
+  talk: {
+    ink: "#d97706",
+    paper: "#fffbeb",
+    shadow: "rgba(217, 119, 6, 0.2)",
+  },
+  break: {
+    ink: "#059669",
+    paper: "#ecfdf5",
+    shadow: "rgba(5, 150, 105, 0.18)",
+  },
+  workshop: {
+    ink: "#7c3aed",
+    paper: "#f5f3ff",
+    shadow: "rgba(124, 58, 237, 0.18)",
+  },
+  performance: {
+    ink: "#db2777",
+    paper: "#fdf2f8",
+    shadow: "rgba(219, 39, 119, 0.18)",
+  },
+};
+
+function getEventTypeStyle(type: TimelineEvent["type"]) {
+  return eventTypeStyles[type];
+}
+
+function getMarkerStyle(
+  index: number,
+  isActive: boolean,
+  type: TimelineEvent["type"]
+): CSSProperties {
+  const typeStyle = getEventTypeStyle(type);
+
+  return {
+    alignItems: "center",
+    backgroundColor: isActive ? typeStyle.paper : "#ffffff",
+    border: `3px solid ${typeStyle.ink}`,
+    borderRadius: "52% 48% 45% 55% / 46% 58% 42% 54%",
+    boxShadow: isActive
+      ? `2px 3px 0 ${typeStyle.shadow}`
+      : "1px 2px 0 rgba(0, 0, 0, 0.08)",
+    color: typeStyle.ink,
+    display: "flex",
+    height: 48,
+    justifyContent: "center",
+    transform: `rotate(${getSketchRotation(index)}deg)`,
+    width: 52,
+  };
+}
+
+function getConnectorStyle(index: number, type: TimelineEvent["type"]): CSSProperties {
+  const typeStyle = getEventTypeStyle(type);
+
+  return {
+    backgroundColor: typeStyle.ink,
+    borderRadius: 999,
+    bottom: -34,
+    left: "50%",
+    position: "absolute",
+    top: 50,
+    transform: `translateX(-50%) rotate(${index % 2 === 0 ? -1 : 1}deg)`,
+    width: 3,
+  };
+}
+
+function getActiveAccentStyle(type: TimelineEvent["type"]): CSSProperties {
+  return {
+    backgroundColor: getEventTypeStyle(type).ink,
+  };
+}
+
+function getActiveContentStyle(type: TimelineEvent["type"]): CSSProperties {
+  const typeStyle = getEventTypeStyle(type);
+
+  return {
+    backgroundColor: typeStyle.paper,
+    boxShadow: `0 0 0 2px ${typeStyle.shadow}`,
+  };
+}
+
+function getLegendStyle(type: TimelineEvent["type"]): CSSProperties {
+  const typeStyle = getEventTypeStyle(type);
+
+  return {
+    backgroundColor: typeStyle.paper,
+    borderColor: typeStyle.ink,
+    color: typeStyle.ink,
+  };
+}
+
+const headerStyle: CSSProperties = {
+  marginBottom: 16,
+};
+
+const timelineStyle: CSSProperties = {
+  paddingTop: 10,
+};
+
+const timelineRowStyle: CSSProperties = {
+  minHeight: 112,
+  paddingBottom: 40,
+};
+
 export function EventTimeline() {
   const [activeEvent, setActiveEvent] = useState<TimelineEvent | null>(null);
   const eventRefs = useRef(new Map<string, HTMLDivElement>());
@@ -113,13 +245,13 @@ export function EventTimeline() {
   }, [activeEvent, scrollToEvent]);
 
   return (
-    <div className="px-4 py-6">
+    <div className="px-4 py-6 text-black">
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-neutral-900 tracking-tight">
+      <div style={headerStyle}>
+        <h1 className="text-3xl font-black leading-none tracking-normal text-black">
           Schedule
         </h1>
-        <p className="text-sm text-neutral-500 mt-1">
+        <p className="mt-2 text-sm font-medium text-neutral-500">
           Saturday, May 23, 2026
         </p>
         {activeEvent && (
@@ -137,11 +269,8 @@ export function EventTimeline() {
       </div>
 
       {/* Timeline */}
-      <div className="relative">
-        {/* Vertical line */}
-        <div className="absolute left-5.5 top-2 bottom-2 w-0.5 bg-linear-to-b from-neutral-200 via-neutral-200 to-neutral-200/0" />
-
-        <div className="space-y-3">
+      <div className="relative" style={timelineStyle}>
+        <div>
           {timelineEvents.map((event, index) => {
             const Icon = eventIcons[event.type];
             const isLast = index === timelineEvents.length - 1;
@@ -158,93 +287,75 @@ export function EventTimeline() {
 
                   eventRefs.current.delete(event.id);
                 }}
-                className="relative flex gap-3"
+                className="relative flex gap-4"
+                style={isLast ? { minHeight: 112 } : timelineRowStyle}
               >
-                {/* Timeline dot with icon */}
-                <div className="relative z-10 shrink-0">
+                {/* Timeline marker */}
+                <div className="relative z-10 flex w-14 shrink-0 justify-center">
                   <div
-                    className={`w-11 h-11 rounded-full flex items-center justify-center ${eventColors[event.type]} shadow-sm`}
+                    data-schedule-marker
+                    style={getMarkerStyle(index, isActive, event.type)}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="h-5 w-5 stroke-[2.4]" />
                   </div>
-                  {/* Connector dot */}
                   {!isLast && (
-                    <div
-                      className={`absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 rounded-full ${dotColors[event.type]} opacity-0`}
-                    />
+                    <div style={getConnectorStyle(index, event.type)} />
                   )}
                 </div>
 
-                {/* Event Card */}
-                <div className="flex-1 min-w-0 pb-3">
-                  <div className="relative">
+                {/* Event content */}
+                <div className="min-w-0 flex-1 pt-0.5">
+                  <div className="relative pr-1">
                     {isActive && (
-                      <div className="absolute -left-2 top-4 h-8 w-1 rounded-full bg-red-500" />
+                      <div
+                        className="-left-3 absolute top-1 h-[calc(100%-0.25rem)] w-1 rounded-full"
+                        style={getActiveAccentStyle(event.type)}
+                      />
                     )}
                     <div
                       className={cn(
-                        "rounded-2xl border border-neutral-200/80 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-[0_2px_6px_rgba(0,0,0,0.06)]",
-                        isActive && "border-red-300 bg-red-50/60 shadow-[0_2px_10px_rgba(239,68,68,0.12)] ring-1 ring-red-100"
+                        "rounded-[18px] border-0 bg-transparent px-0 py-0",
+                        isActive && "rounded-[20px] px-3 py-2"
                       )}
+                      style={isActive ? getActiveContentStyle(event.type) : undefined}
                     >
                       {/* Time badge */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="inline-flex items-center text-xs font-medium text-neutral-900 bg-neutral-100 px-2 py-0.5 rounded-full">
-                          <Clock className="w-3 h-3 mr-1" />
+                      <div className="mb-0.5 flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center text-lg font-medium leading-tight text-black">
                           {event.time}
                           {event.endTime && ` - ${event.endTime}`}
                         </span>
                         {isActive && (
-                          <span className="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+                          <span className="-rotate-2 inline-flex items-center rounded-[48%_52%_44%_56%/58%_42%_55%_45%] border-2 border-red-600 bg-white px-2 py-0.5 text-[11px] font-black uppercase tracking-normal text-red-600">
                             Now
                           </span>
                         )}
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-1">
+                      <h3
+                        className="mb-0.5 text-lg font-black leading-tight"
+                        style={{ color: getEventTypeStyle(event.type).ink }}
+                      >
                         {event.title}
                       </h3>
 
                       {/* Description */}
                       {event.description && (
-                        <p className="text-sm text-neutral-600 leading-relaxed mb-2">
+                        <p className="mb-0.5 text-sm font-medium leading-snug text-black">
                           {event.description}
                         </p>
                       )}
 
                       {/* Location */}
                       {event.location && (
-                        <div className="flex items-center text-xs text-neutral-400">
-                          <Presentation className="w-3 h-3 mr-1" />
+                        <div className="text-sm font-medium leading-snug text-neutral-500">
                           {event.location}
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Legend */}
-      <div className="mt-8 pt-4 border-t border-neutral-100">
-        <p className="text-xs text-neutral-400 mb-3 font-medium uppercase tracking-wider">
-          Event Types
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {Object.keys(eventColors).map((type) => {
-            const Icon = eventIcons[type as TimelineEvent["type"]];
-            const label = type.charAt(0).toUpperCase() + type.slice(1);
-            return (
-              <div
-                key={type}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-neutral-50 text-xs text-neutral-600"
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{label}</span>
               </div>
             );
           })}
