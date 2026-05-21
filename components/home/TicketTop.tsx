@@ -5,7 +5,7 @@ export function TicketTop() {
     <Link
       href="/ticket"
       aria-label="Open your ticket"
-      className="relative -mt-10 block h-[214px] w-full shrink-0 overflow-hidden bg-[#009b50] pb-[env(safe-area-inset-bottom)] active:-translate-y-1 sm:-mt-12 sm:h-[222px]"
+      className="relative mx-auto -mt-10 block h-[214px] w-[calc(100%-48px)] max-w-[380px] shrink-0 overflow-hidden bg-[#009b50] pb-[env(safe-area-inset-bottom)] active:-translate-y-1 sm:-mt-12 sm:h-[222px]"
     >
       <div className="absolute -top-10 left-[10%] h-20 w-20 rounded-full bg-white" />
       <div className="absolute -top-10 left-[40%] h-20 w-20 rounded-full bg-white" />

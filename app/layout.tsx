@@ -23,8 +23,8 @@ export default function RootLayout({
         */}
         <div className="fixed inset-0 bg-white text-black">
           <div className="relative mx-auto flex h-full w-full max-w-[430px] flex-col overflow-hidden bg-white">
-            {/* <Header /> */}
-            {/* <SideNav /> */}
+            <Header />
+            <SideNav />
             <DeveloperSignature />
             <main className="relative min-h-0 flex-1 overflow-x-hidden overflow-y-scroll overscroll-contain [-webkit-overflow-scrolling:touch]">
               {children}
