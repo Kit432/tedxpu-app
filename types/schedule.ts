@@ -5,5 +5,6 @@ export interface TimelineEvent {
   title: string;
   description?: string;
   location?: string;
+  isSectionHeader?: boolean;
   type: "registration" | "talk" | "break" | "workshop" | "performance" | "ceremony";
 }
