@@ -13,8 +13,17 @@ const STOP_DELAY_MS = 900;
 const SUCCESS_ANIMATION_MS = 1400;
 const FAIL_RESET_MS = 500;
 
+function parseSvgPathData(svgText: string) {
+  const document = new DOMParser().parseFromString(svgText, "image/svg+xml");
+
+  return Array.from(document.querySelectorAll("path"))
+    .map((path) => path.getAttribute("d"))
+    .filter((path): path is string => Boolean(path));
+}
+
 export function DrawingGame() {
   const [drawingIndex, setDrawingIndex] = useState(0);
+  const [targetPaths, setTargetPaths] = useState<string[]>([]);
   const [strokes, setStrokes] = useState<Point[][]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -69,6 +78,34 @@ export function DrawingGame() {
     resetDrawing();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawingIndex]);
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    if (!currentDrawing.pathSrc) {
+      setTargetPaths(currentDrawing.targetPaths);
+      return;
+    }
+
+    setTargetPaths([]);
+
+    fetch(currentDrawing.pathSrc)
+      .then((response) => response.text())
+      .then((svgText) => {
+        if (isCurrent) {
+          setTargetPaths(parseSvgPathData(svgText));
+        }
+      })
+      .catch(() => {
+        if (isCurrent) {
+          setTargetPaths(currentDrawing.targetPaths);
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [currentDrawing]);
 
   useEffect(() => {
     return () => {
@@ -196,7 +233,7 @@ export function DrawingGame() {
           viewBox={currentDrawing.viewBox}
           className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
         >
-          {currentDrawing.targetPaths.map((path, index) => (
+          {targetPaths.map((path, index) => (
             <path
               key={`hidden-${index}`}
               ref={(element) => {
@@ -224,6 +261,27 @@ export function DrawingGame() {
           }`}
         />
 
+        {/* Visible trace guides */}
+        {currentDrawing.showGuidePaths && (
+          <svg
+            viewBox={currentDrawing.viewBox}
+            className="pointer-events-none absolute inset-0 z-[15] h-full w-full overflow-visible"
+          >
+            {targetPaths.map((path, index) => (
+              <path
+                key={`guide-${index}`}
+                d={path}
+                fill="none"
+                stroke={currentDrawing.guideStroke ?? "#E6E6E6"}
+                strokeWidth={currentDrawing.guideStrokeWidth ?? 12}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray={currentDrawing.guideStrokeDasharray ?? "12 24"}
+              />
+            ))}
+          </svg>
+        )}
+
         {/* User strokes */}
         <svg
           viewBox={currentDrawing.viewBox}
@@ -235,7 +293,7 @@ export function DrawingGame() {
               d={path}
               fill="none"
               stroke="#F17BB0"
-              strokeWidth="12"
+              strokeWidth="28"
               strokeLinecap="round"
               strokeLinejoin="round"
             />

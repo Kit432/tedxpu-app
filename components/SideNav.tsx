@@ -53,6 +53,10 @@ function isActivePath(pathname: string, item: NavItem) {
 export default function SideNav() {
   const pathname = usePathname();
 
+  if (pathname === "/ticket") {
+    return null;
+  }
+
   return (
     <nav
       className="fixed top-1/2 z-50 flex -translate-y-1/2 flex-col items-center gap-5"

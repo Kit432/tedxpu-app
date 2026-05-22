@@ -29,3 +29,15 @@ export interface TeamMember {
   role: string;
   image: string;
 }
+
+export interface TeamGroupMember {
+  name: string;
+  director?: boolean;
+}
+
+export interface TeamGroup {
+  name: string;
+  slug: string;
+  image: string;
+  members: TeamGroupMember[];
+}
