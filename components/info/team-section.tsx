@@ -1,39 +1,6 @@
 import Image from "next/image";
 import { teamGroups } from "@/lib/info-data";
 
-const posterLayouts = [
-  {
-    frame: "w-[78%] -rotate-7",
-    caption: "ml-4 max-w-[78%]",
-    spacing: "pt-1",
-  },
-  {
-    frame: "ml-auto w-[82%] rotate-6",
-    caption: "ml-auto mr-2 max-w-[82%]",
-    spacing: "mt-8",
-  },
-  {
-    frame: "w-[92%] -rotate-5",
-    caption: "ml-2 max-w-[88%]",
-    spacing: "mt-12",
-  },
-  {
-    frame: "ml-auto w-[90%] rotate-4",
-    caption: "ml-auto mr-1 max-w-[90%]",
-    spacing: "mt-10",
-  },
-  {
-    frame: "w-[84%] -rotate-4",
-    caption: "ml-3 max-w-[84%]",
-    spacing: "mt-10",
-  },
-  {
-    frame: "ml-auto w-[88%] rotate-5",
-    caption: "ml-auto max-w-[88%]",
-    spacing: "mt-10",
-  },
-];
-
 export function TeamSection() {
   return (
     <section className="overflow-hidden px-6 pb-24 pt-3">
@@ -43,11 +10,25 @@ export function TeamSection() {
 
       <div className="space-y-1">
         {teamGroups.map((group, index) => {
-          const layout = posterLayouts[index % posterLayouts.length];
+          const photoSizes = [
+            "w-[calc(100vw-12px)] max-w-[420px]", // Curation
+            "w-screen max-w-[600px]",             // Graphics & Design
+            "w-screen max-w-[600px]",             // Marketing & IT
+            "w-screen max-w-[560px]",             // Experience
+            "w-screen max-w-[660px]",             // Speakers
+            "w-screen max-w-[560px]",             // Sponsorships
+          ];
+
+          const photoSize = photoSizes[index] ?? "w-screen max-w-[520px]";
 
           return (
-            <article key={group.slug} className={layout.spacing}>
-              <div className={`relative aspect-[1.42/1] ${layout.frame}`}>
+            <article
+              key={group.slug}
+              className={index === 0 ? "pt-1 text-center" : "mt-10 text-center"}
+            >
+              <div
+                className={`relative left-1/2 aspect-[1.42/1] -translate-x-1/2 ${photoSize}`}
+              >
                 <Image
                   src={group.image}
                   alt={`${group.name} photo group`}
@@ -56,9 +37,29 @@ export function TeamSection() {
                   sizes="(max-width: 430px) 360px, 390px"
                   priority={index < 2}
                 />
+
+                {index === 1 ? (
+                  <Image
+                    src="/team/pencil.svg"
+                    alt=""
+                    width={686}
+                    height={936}
+                    className="absolute bottom-0 right-2 z-10 h-auto w-24"
+                  />
+                ) : null}
+
+                {index === 0 ? (
+                  <Image
+                    src="/team/flower.svg"
+                    alt=""
+                    width={464}
+                    height={612}
+                    className="absolute -bottom-28 right-2 z-10 h-auto w-34"
+                  />
+                ) : null}
               </div>
 
-              <div className={`mt-2 text-[11px] leading-snug text-black ${layout.caption}`}>
+              <div className="mx-auto mt-2 max-w-[88%] text-center text-[11px] leading-snug text-black">
                 <p className="font-medium italic">{group.name.toLowerCase()}</p>
                 <p className="mt-0.5">
                   {group.members.map((member, memberIndex) => (
