@@ -43,6 +43,24 @@ const registerStyle: CSSProperties = {
   zIndex: 10,
 };
 
+const wineIconStyle: CSSProperties = {
+  bottom: 22,
+  height: 182,
+  position: "absolute",
+  right: -28,
+  width: 182,
+  zIndex: 5,
+};
+
+const flowerIconStyle: CSSProperties = {
+  bottom: 2,
+  height: 192,
+  position: "absolute",
+  right: -8,
+  width: 192,
+  zIndex: 5,
+};
+
 const cardStyles: CSSProperties[] = [
   {
     transform: "rotate(-1deg)",
@@ -121,8 +139,8 @@ export function WorkshopCard({ workshop, index }: WorkshopCardProps) {
       >
         <HandDrawnFrame />
 
-        <div className="relative z-10 mt-10 max-w-full">
-          <h2 className="whitespace-nowrap text-black" style={titleStyle}>
+        <div className="relative z-10 mt-0 max-w-full sm:mt-5">
+          <h2 className="text-black" style={titleStyle}>
             {workshop.title}
           </h2>
           <p className="whitespace-nowrap" style={descriptionStyle}>
@@ -138,6 +156,24 @@ export function WorkshopCard({ workshop, index }: WorkshopCardProps) {
             -{workshop.room}
           </p>
         </div>
+
+        {index === 1 ? (
+          <img
+            src="/workshop/wine.svg"
+            alt=""
+            aria-hidden="true"
+            style={wineIconStyle}
+          />
+        ) : null}
+
+        {index === 0 ? (
+          <img
+            src="/workshop/flower.svg"
+            alt=""
+            aria-hidden="true"
+            style={flowerIconStyle}
+          />
+        ) : null}
 
         <Link
           href={workshop.registerHref}

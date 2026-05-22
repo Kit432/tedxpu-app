@@ -1,34 +1,45 @@
-import { Workshop } from "@/types/workshop";
+import { timelineEvents } from "@/lib/schedule-data";
+import type { Workshop } from "@/types/workshop";
 
-export const workshops: Workshop[] = [
-  {
-    title: "Wine Tasting WS",
+const workshopDetailsById: Record<
+  string,
+  Pick<Workshop, "description" | "facilitator" | "room" | "seatsLeft" | "capacity" | "registerHref">
+> = {
+  "theater-workshop": {
+    description: "About the workshop",
+    facilitator: "TEDxPU Team",
+    room: "Workshop Area",
+    seatsLeft: 0,
+    capacity: 0,
+    registerHref: "#",
+  },
+  "wine-tasting-workshop": {
     description: "About the workshop",
     facilitator: "K.Theodorakakoy",
-    time: "17:15 - 17:45",
     room: "Room A",
     seatsLeft: 2,
     capacity: 30,
     registerHref: "#",
   },
-  {
-    title: "Sound and memory",
-    description: "A sensory field lab",
-    facilitator: "M. Antoniou",
-    time: "13:15 - 14:00",
-    room: "Room B",
-    seatsLeft: 7,
-    capacity: 24,
-    registerHref: "#",
-  },
-  {
-    title: "Sketch the senses",
-    description: "Fast drawing session",
-    facilitator: "TEDxPU Team",
-    time: "15:30 - 16:15",
-    room: "Room C",
-    seatsLeft: 11,
-    capacity: 28,
-    registerHref: "#",
-  },
-];
+};
+
+function formatWorkshopTime(time: string, endTime?: string) {
+  return endTime ? `${time} - ${endTime}` : time;
+}
+
+export const workshops: Workshop[] = timelineEvents
+  .filter((event) => event.type === "workshop")
+  .map((event) => {
+    const details = workshopDetailsById[event.id];
+
+    return {
+      title: event.title,
+      description: details?.description ?? "",
+      facilitator: details?.facilitator ?? "",
+      time: formatWorkshopTime(event.time, event.endTime),
+      room: details?.room ?? event.location ?? "",
+      seatsLeft: details?.seatsLeft ?? 0,
+      capacity: details?.capacity ?? 0,
+      registerHref: details?.registerHref ?? "#",
+    };
+  });

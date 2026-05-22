@@ -85,6 +85,14 @@ export const timelineEvents: TimelineEvent[] = [
     type: "break",
   },
   {
+    id: "theater-workshop",
+    time: "14:00",
+    endTime: "15:20",
+    title: "Theater Workshop",
+    location: "Workshop Area",
+    type: "workshop",
+  },
+  {
     id: "session-2-host-opening",
     time: "15:20",
     endTime: "15:25",
