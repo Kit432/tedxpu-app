@@ -3,23 +3,21 @@ import type { Workshop } from "@/types/workshop";
 
 const workshopDetailsById: Record<
   string,
-  Pick<Workshop, "description" | "facilitator" | "room" | "seatsLeft" | "capacity" | "registerHref">
+  Pick<Workshop, "description" | "facilitator" | "room" | "seatsLeft" | "registerHref">
 > = {
   "theater-workshop": {
     description: "About the workshop",
     facilitator: "TEDxPU Team",
     room: "Workshop Area",
     seatsLeft: 0,
-    capacity: 0,
-    registerHref: "#",
+    registerHref: "https://docs.google.com/forms/d/e/1FAIpQLSf6hjhriTNK0SfPGBQkI7PKYb5oc47XUGW8SO_uQvLASVd-YQ/viewform?pli=1",
   },
   "wine-tasting-workshop": {
     description: "About the workshop",
     facilitator: "K.Theodorakakoy",
     room: "Room A",
     seatsLeft: 2,
-    capacity: 30,
-    registerHref: "#",
+    registerHref: "https://docs.google.com/forms/d/e/1FAIpQLSf7JB9ocr8OxlzT88oJL5bOMbk1cg-oaTGQiw91GyO1YDb1hA/viewform",
   },
 };
 
@@ -39,7 +37,6 @@ export const workshops: Workshop[] = timelineEvents
       time: formatWorkshopTime(event.time, event.endTime),
       room: details?.room ?? event.location ?? "",
       seatsLeft: details?.seatsLeft ?? 0,
-      capacity: details?.capacity ?? 0,
       registerHref: details?.registerHref ?? "#",
     };
   });

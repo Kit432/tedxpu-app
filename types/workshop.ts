@@ -5,6 +5,5 @@ export type Workshop = {
   time: string;
   room: string;
   seatsLeft: number;
-  capacity: number;
   registerHref: string;
 };

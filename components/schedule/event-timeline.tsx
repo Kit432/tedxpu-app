@@ -10,7 +10,7 @@ const EVENT_TIME_ZONE = "Europe/Athens";
 const EVENT_DATE = {
   year: 2026,
   month: 5,
-  day: 21,
+  day: 23,
 };
 
 function parseTimeToMinutes(time: string) {
