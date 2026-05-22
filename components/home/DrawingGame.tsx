@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sensoriumDrawings, calculateDrawingResult } from "@/lib/drawing-game";
 
@@ -250,12 +249,12 @@ export function DrawingGame() {
         </svg>
 
         {/* Real artwork from Figma */}
-        <Image
+        <img
           src={currentDrawing.artSrc}
           alt=""
-          fill
-          sizes="200px"
           aria-hidden="true"
+          decoding="async"
+          draggable={false}
           className={`pointer-events-none absolute inset-0 z-10 h-full w-full object-contain transition duration-500 ${
             isSuccess ? "scale-[1.03]" : "scale-100"
           }`}
