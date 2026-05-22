@@ -2,6 +2,7 @@
 
 import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { timelineEvents, eventIcons } from "@/lib/schedule-data";
+import { speakers } from "@/lib/speaker-data";
 import { TimelineEvent } from "@/types/schedule";
 import { cn } from "@/lib/utils";
 
@@ -71,6 +72,22 @@ function findActiveEvent(date: Date) {
   }
 
   return matchingEvents.find((event) => !event.isSectionHeader) ?? matchingEvents[0];
+}
+
+const speakersByEventId = new Map(speakers.map((speaker) => [speaker.id, speaker]));
+
+function getSpeakerForEvent(event: TimelineEvent) {
+  const directMatch = speakersByEventId.get(event.id);
+
+  if (directMatch) {
+    return directMatch;
+  }
+
+  if (event.title === "ΑΛΙΚΗ" && event.description === "Hostess") {
+    return speakersByEventId.get("session-host-aliki");
+  }
+
+  return undefined;
 }
 
 const sketchRotations = [
@@ -183,6 +200,25 @@ function getActiveContentStyle(type: TimelineEvent["type"]): CSSProperties {
   };
 }
 
+function ScheduleMarkerIcon({ type }: { type: TimelineEvent["type"] }) {
+  const icon = eventIcons[type];
+
+  if (icon.kind === "image") {
+    return (
+      <img
+        src={icon.src}
+        alt=""
+        aria-hidden="true"
+        className="h-9 max-w-8 object-contain"
+      />
+    );
+  }
+
+  const Icon = icon.Icon;
+
+  return <Icon className="h-5 w-5 stroke-[2.4]" />;
+}
+
 function getLegendStyle(type: TimelineEvent["type"]): CSSProperties {
   const typeStyle = getEventTypeStyle(type);
 
@@ -208,6 +244,7 @@ const timelineRowStyle: CSSProperties = {
 
 export function EventTimeline() {
   const [activeEvent, setActiveEvent] = useState<TimelineEvent | null>(null);
+  const [expandedEventId, setExpandedEventId] = useState<string | null>(null);
   const eventRefs = useRef(new Map<string, HTMLDivElement>());
   const hasScrolledToActiveEvent = useRef(false);
 
@@ -272,9 +309,11 @@ export function EventTimeline() {
       <div className="relative" style={timelineStyle}>
         <div>
           {timelineEvents.map((event, index) => {
-            const Icon = eventIcons[event.type];
             const isLast = index === timelineEvents.length - 1;
             const isActive = activeEvent?.id === event.id;
+            const speaker = getSpeakerForEvent(event);
+            const canExpand = Boolean(speaker?.bio);
+            const isExpanded = expandedEventId === event.id;
 
             return (
               <div
@@ -296,7 +335,7 @@ export function EventTimeline() {
                     data-schedule-marker
                     style={getMarkerStyle(index, isActive, event.type)}
                   >
-                    <Icon className="h-5 w-5 stroke-[2.4]" />
+                    <ScheduleMarkerIcon type={event.type} />
                   </div>
                   {!isLast && (
                     <div style={getConnectorStyle(index, event.type)} />
@@ -333,12 +372,37 @@ export function EventTimeline() {
                       </div>
 
                       {/* Title */}
-                      <h3
-                        className="mb-0.5 text-lg font-black leading-tight"
-                        style={{ color: getEventTypeStyle(event.type).ink }}
-                      >
-                        {event.title}
-                      </h3>
+                      <div className="mb-0.5 flex items-center gap-2">
+                        <h3
+                          className="min-w-0 text-lg font-black leading-tight"
+                          style={{ color: getEventTypeStyle(event.type).ink }}
+                        >
+                          {event.title}
+                        </h3>
+                        {canExpand && (
+                          <button
+                            type="button"
+                            aria-expanded={isExpanded}
+                            aria-controls={`${event.id}-bio`}
+                            aria-label={`${isExpanded ? "Hide" : "Show"} bio for ${event.title}`}
+                            onClick={() => setExpandedEventId(isExpanded ? null : event.id)}
+                            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 bg-white shadow-sm transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                            style={{
+                              borderColor: getEventTypeStyle(event.type).ink,
+                              color: getEventTypeStyle(event.type).ink,
+                            }}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className={cn(
+                                "h-0 w-0 border-x-[5px] border-t-[7px] border-x-transparent transition-transform",
+                                isExpanded && "rotate-180"
+                              )}
+                              style={{ borderTopColor: "currentColor" }}
+                            />
+                          </button>
+                        )}
+                      </div>
 
                       {/* Description */}
                       {event.description && (
@@ -351,6 +415,20 @@ export function EventTimeline() {
                       {event.location && (
                         <div className="text-sm font-medium leading-snug text-neutral-500">
                           {event.location}
+                        </div>
+                      )}
+
+                      {canExpand && isExpanded && speaker && (
+                        <div
+                          id={`${event.id}-bio`}
+                          className="mt-3 border-t border-black/10 pt-3"
+                        >
+                          <p className="text-sm font-black leading-tight text-black">
+                            {speaker.name}
+                          </p>
+                          <p className="mt-1 text-sm font-medium leading-snug text-black">
+                            {speaker.bio}
+                          </p>
                         </div>
                       )}
                     </div>

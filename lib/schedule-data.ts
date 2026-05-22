@@ -1,4 +1,5 @@
-import { Calendar, Mic, Coffee, Users, Music, Award } from "lucide-react";
+import type { ComponentType } from "react";
+import { Mic } from "lucide-react";
 import { TimelineEvent } from "@/types/schedule";
 
 export const timelineEvents: TimelineEvent[] = [
@@ -83,19 +84,11 @@ export const timelineEvents: TimelineEvent[] = [
     title: "1st Break",
     type: "break",
   },
-  {
-    id: "access-kayff",
+    {
+    id: "theater-workshop",
     time: "14:00",
-    endTime: "14:30",
-    title: "Access x Kayff",
-    location: "Workshop Area",
-    type: "workshop",
-  },
-  {
-    id: "ubitech-workshop",
-    time: "14:30",
-    endTime: "15:00",
-    title: "Ubitech Workshop",
+    endTime: "15:20",
+    title: "Θεατρικό Workshop",
     location: "Workshop Area",
     type: "workshop",
   },
@@ -163,14 +156,6 @@ export const timelineEvents: TimelineEvent[] = [
     endTime: "17:50",
     title: "2nd Break",
     type: "break",
-  },
-  {
-    id: "theater-workshop",
-    time: "16:45",
-    endTime: "17:15",
-    title: "Θεατρικό Workshop",
-    location: "Workshop Area",
-    type: "workshop",
   },
   {
     id: "wine-tasting-workshop",
@@ -248,13 +233,41 @@ export const timelineEvents: TimelineEvent[] = [
   },
 ];
 
-export const eventIcons: Record<TimelineEvent["type"], React.ComponentType<{ className?: string }>> = {
-  registration: Calendar,
-  talk: Mic,
-  break: Coffee,
-  workshop: Users,
-  performance: Music,
-  ceremony: Award,
+type EventIcon =
+  | {
+      kind: "component";
+      Icon: ComponentType<{ className?: string }>;
+    }
+  | {
+      kind: "image";
+      src: string;
+    };
+
+export const eventIcons: Record<TimelineEvent["type"], EventIcon> = {
+  registration: {
+    kind: "image",
+    src: "/schedule/register.svg",
+  },
+  talk: {
+    kind: "component",
+    Icon: Mic,
+  },
+  break: {
+    kind: "image",
+    src: "/schedule/break.svg",
+  },
+  workshop: {
+    kind: "image",
+    src: "/schedule/eye.svg",
+  },
+  performance: {
+    kind: "image",
+    src: "/schedule/eye.svg",
+  },
+  ceremony: {
+    kind: "image",
+    src: "/schedule/eye.svg",
+  },
 };
 
 export const eventColors: Record<TimelineEvent["type"], string> = {
